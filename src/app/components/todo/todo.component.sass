@@ -1,0 +1,196 @@
+.todo-container
+  max-width: 800px
+  margin: 0 auto
+  padding: 20px
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif
+
+  h1
+    text-align: center
+    color: #333
+    margin-bottom: 30px
+
+  h2
+    color: #555
+    margin-bottom: 15px
+    font-size: 1.2em
+
+.add-todo-form
+  background: #f8f9fa
+  padding: 20px
+  border-radius: 8px
+  margin-bottom: 30px
+  border: 1px solid #e9ecef
+
+  .form-group
+    margin-bottom: 15px
+
+  .form-input, .form-textarea
+    width: 100%
+    padding: 10px
+    border: 1px solid #ddd
+    border-radius: 4px
+    font-size: 14px
+    box-sizing: border-box
+
+    &:focus
+      outline: none
+      border-color: #007bff
+      box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25)
+
+  .form-textarea
+    resize: vertical
+    min-height: 60px
+
+.todo-list
+  .no-todos
+    text-align: center
+    color: #666
+    font-style: italic
+    padding: 40px
+    background: #f8f9fa
+    border-radius: 8px
+
+.todos
+  display: flex
+  flex-direction: column
+  gap: 15px
+
+.todo-item
+  background: white
+  border: 1px solid #e9ecef
+  border-radius: 8px
+  padding: 20px
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1)
+  transition: all 0.2s ease
+
+  &:hover
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15)
+
+  &.completed
+    opacity: 0.7
+    background: #f8f9fa
+
+.todo-content
+  .todo-header
+    display: flex
+    justify-content: space-between
+    align-items: flex-start
+    margin-bottom: 10px
+
+    h3
+      margin: 0
+      color: #333
+      font-size: 1.1em
+      flex: 1
+      margin-right: 15px
+
+      &.completed-text
+        text-decoration: line-through
+        color: #666
+
+  .todo-description
+    color: #666
+    margin: 10px 0
+    line-height: 1.4
+
+    &.completed-text
+      text-decoration: line-through
+
+  .todo-meta
+    display: flex
+    gap: 15px
+    margin: 10px 0
+    font-size: 0.85em
+    color: #888
+
+  .todo-actions
+    display: flex
+    gap: 8px
+
+  .todo-status
+    margin-top: 15px
+    padding-top: 15px
+    border-top: 1px solid #eee
+
+.edit-form
+  .form-input, .form-textarea
+    width: 100%
+    padding: 8px
+    border: 1px solid #ddd
+    border-radius: 4px
+    font-size: 14px
+    margin-bottom: 10px
+    box-sizing: border-box
+
+  .edit-actions
+    display: flex
+    gap: 8px
+
+.checkbox-container
+  display: flex
+  align-items: center
+  cursor: pointer
+  font-size: 14px
+
+  input[type="checkbox"]
+    margin-right: 8px
+
+  .checkmark
+    margin-left: 5px
+
+// Button Styles
+.btn
+  padding: 8px 16px
+  border: none
+  border-radius: 4px
+  cursor: pointer
+  font-size: 14px
+  font-weight: 500
+  transition: all 0.2s ease
+  text-decoration: none
+  display: inline-block
+
+  &:disabled
+    opacity: 0.6
+    cursor: not-allowed
+
+  &.btn-primary
+    background: #007bff
+    color: white
+
+    &:hover:not(:disabled)
+      background: #0056b3
+
+  &.btn-success
+    background: #28a745
+    color: white
+
+    &:hover:not(:disabled)
+      background: #1e7e34
+
+  &.btn-danger
+    background: #dc3545
+    color: white
+
+    &:hover:not(:disabled)
+      background: #c82333
+
+  &.btn-secondary
+    background: #6c757d
+    color: white
+
+    &:hover:not(:disabled)
+      background: #545b62
+
+  &.btn-outline
+    background: transparent
+    color: #007bff
+    border: 1px solid #007bff
+
+    &:hover:not(:disabled)
+      background: #007bff
+      color: white
+
+  &.btn-sm
+    padding: 4px 8px
+    font-size: 12px

@@ -1,0 +1,111 @@
+<div class="todo-container">
+  <h1>Firestore Todo App</h1>
+  
+  <!-- Add Todo Form -->
+  <div class="add-todo-form">
+    <h2>Add New Todo</h2>
+    <div class="form-group">
+      <input 
+        type="text" 
+        placeholder="Todo title" 
+        [ngModel]="newTodoTitle()" 
+        (ngModelChange)="newTodoTitle.set($event)"
+        class="form-input"
+      >
+    </div>
+    <div class="form-group">
+      <textarea 
+        placeholder="Description (optional)" 
+        [ngModel]="newTodoDescription()" 
+        (ngModelChange)="newTodoDescription.set($event)"
+        class="form-textarea"
+        rows="3"
+      ></textarea>
+    </div>
+    <button (click)="addTodo()" class="btn btn-primary" [disabled]="!newTodoTitle().trim()">
+      Add Todo
+    </button>
+  </div>
+
+  <!-- Todo List -->
+  <div class="todo-list">
+    <h2>Todos ({{ todos$().length }})</h2>
+    
+    @if (todos$().length === 0) {
+      <p class="no-todos">No todos yet. Add one above!</p>
+    } @else {
+      <div class="todos">
+        @for (todo of todos$(); track todo.id) {
+          <div class="todo-item" [class.completed]="todo.completed">
+            @if (editingTodo()?.id === todo.id) {
+              <!-- Edit Mode -->
+              <div class="edit-form">
+                <input 
+                  type="text" 
+                  [ngModel]="editTitle()" 
+                  (ngModelChange)="editTitle.set($event)"
+                  class="form-input"
+                >
+                <textarea 
+                  [ngModel]="editDescription()" 
+                  (ngModelChange)="editDescription.set($event)"
+                  class="form-textarea"
+                  rows="2"
+                ></textarea>
+                <div class="edit-actions">
+                  <button (click)="updateTodo(todo)" class="btn btn-success btn-sm">
+                    Save
+                  </button>
+                  <button (click)="cancelEdit()" class="btn btn-secondary btn-sm">
+                    Cancel
+                  </button>
+                </div>
+              </div>
+            } @else {
+              <!-- Display Mode -->
+              <div class="todo-content">
+                <div class="todo-header">
+                  <h3 [class.completed-text]="todo.completed">{{ todo.title }}</h3>
+                  <div class="todo-actions">
+                    <button (click)="startEdit(todo)" class="btn btn-sm btn-outline">
+                      Edit
+                    </button>
+                    <button (click)="deleteTodo(todo.id!)" class="btn btn-sm btn-danger">
+                      Delete
+                    </button>
+                  </div>
+                </div>
+                @if (todo.description) {
+                  <p class="todo-description" [class.completed-text]="todo.completed">
+                    {{ todo.description }}
+                  </p>
+                }
+                <div class="todo-meta">
+                  <span class="todo-date">
+                    Created: {{ todo.createdAt | date:'short' }}
+                  </span>
+                  @if (todo.updatedAt.getTime() !== todo.createdAt.getTime()) {
+                    <span class="todo-date">
+                      Updated: {{ todo.updatedAt | date:'short' }}
+                    </span>
+                  }
+                </div>
+                <div class="todo-status">
+                  <label class="checkbox-container">
+                    <input 
+                      type="checkbox" 
+                      [checked]="todo.completed" 
+                      (change)="toggleTodo(todo.id!)"
+                    >
+                    <span class="checkmark"></span>
+                    {{ todo.completed ? 'Completed' : 'Mark as Complete' }}
+                  </label>
+                </div>
+              </div>
+            }
+          </div>
+        }
+      </div>
+    }
+  </div>
+</div>
